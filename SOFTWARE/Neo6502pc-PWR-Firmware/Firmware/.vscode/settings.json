@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "ch32v00x.h": "c",
+        "log_debug.h": "c",
+        "debug.h": "c",
+        "uptime.h": "c",
+        "adc.h": "c",
+        "type_traits": "cpp"
+    }
+}

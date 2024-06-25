@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "PlatformIO",
+			"task": "Monitor",
+			"problemMatcher": [
+				"$platformio"
+			],
+			"label": "PlatformIO: Monitor",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"type": "PlatformIO",
+			"task": "Build (genericCH32V003F4P6)",
+			"problemMatcher": [
+				"$platformio"
+			],
+			"group": "build",
+			"label": "PlatformIO: Build (genericCH32V003F4P6)"
+		}
+	]
+}
