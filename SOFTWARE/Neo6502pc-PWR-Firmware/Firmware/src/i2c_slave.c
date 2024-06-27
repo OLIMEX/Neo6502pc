@@ -70,7 +70,7 @@ void I2C_Slave_Begin() {
 	GPIO_InitTypeDef GPIO_PortC = {0};
 	GPIO_PortC.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2;
 	GPIO_PortC.GPIO_Mode = GPIO_Mode_AF_OD;
-	GPIO_PortC.GPIO_Speed = GPIO_Speed_10MHz;
+	GPIO_PortC.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOC, &GPIO_PortC);
 
 	// Enable I2C1
