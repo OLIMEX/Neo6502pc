@@ -11,6 +11,11 @@ int main(void) {
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	SystemCoreClockUpdate();
 
+	// Disable GPIO Alternate Functions and extrnal oscilator
+	// Othewize GPIO PORT A does not work
+	RCC_HSEConfig(RCC_HSE_OFF);
+	GPIO_PinRemapConfig(GPIO_Remap_PA1_2, DISABLE);
+
 	Uptime_Init();
 	LOG_DEBUG_Configure(115200, USART_StopBits_1, USART_Parity_No);
 
