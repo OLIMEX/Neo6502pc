@@ -15,7 +15,9 @@ typedef enum {
 #define ADC_TIMEOUT_MS    100
 
 ADC_Error_Type ADC_Channel_Init(GPIO_TypeDef *port, uint16_t pin, uint32_t timeoutMS);
-ADC_Error_Type Get_ADC_Val(uint32_t timeoutMS, uint16_t *ADC_Value);
+ADC_Error_Type ADC_Calibrate(uint32_t timeoutMS);
+ADC_Error_Type Get_ADC_Val(uint8_t ADC_Channel, uint32_t timeoutMS, uint16_t *ADC_Value);
+ADC_Error_Type Get_ADC_Average(uint8_t ADC_channel, uint32_t timeoutMS, uint8_t count, uint16_t *ADC_Value);
 uint16_t ADC_Map(uint16_t value, uint16_t minValue, uint16_t maxValue, float minVoltage, float maxVoltage);
 
 #ifdef __cplusplus
