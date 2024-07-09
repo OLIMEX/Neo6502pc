@@ -19,7 +19,7 @@
 #define EXT_GPIO_I2C_ADDR            0x33
 
 #define EXT_GPIO_API_MAJOR           1
-#define EXT_GPIO_API_MINOR           0
+#define EXT_GPIO_API_MINOR           1
 
 #define EXT_GPIO_REG_API_MAJOR       0x00
 #define EXT_GPIO_REG_API_MINOR       0x01
