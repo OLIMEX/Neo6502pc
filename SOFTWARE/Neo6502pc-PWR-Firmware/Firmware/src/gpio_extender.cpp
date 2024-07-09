@@ -91,7 +91,7 @@ void GPIO_Extender::Begin() {
 	}
 
 	// BAT_SENSE configuration
-	if (ADC_Channel_Init(GPIOD, GPIO_Pin_2, ADC_TIMEOUT_MS) == ADC_SUCCESS) {
+	if (ADC_Channel_Init(EXT_GPIO_BATSENS_PORT, EXT_GPIO_BATSENS_PIN, ADC_TIMEOUT_MS) == ADC_SUCCESS) {
 		LOG_DEBUG("GPIO_Extender: BAT_SENSE configured" EOL);
 	} else {
 		LOG_DEBUG("GPIO_Extender:BAT_SENSE configuration FAILED" EOL);
@@ -282,7 +282,7 @@ uint8_t GPIO_Extender::getPin(uint8_t pin) {
 
 uint8_t GPIO_Extender::getBatPercent() {
 	uint8_t value = 0;
-	uint16_t measure = getBatVoltage();
+	uint16_t measure = getBatVoltage(true);
 
 	if (measure < EXT_GPIO_BATSENS_MIN) {
 		value = 0;
@@ -298,14 +298,20 @@ uint8_t GPIO_Extender::getBatPercent() {
 	return value;
 }
 
-uint16_t GPIO_Extender::getBatVoltage() {
+uint16_t GPIO_Extender::getBatVoltage(bool average, uint8_t count) {
 	uint16_t value = 0;
 
 	if (getPin(EXT_GPIO_PIN_PWRSENS)) {
 		// When external power is present measuring battery voltage is nonsense
 		LOG_DEBUG("GPIO_Extender: On external power" EOL);
 	} else {
-		if (Get_ADC_Val(ADC_TIMEOUT_MS, &value) == ADC_SUCCESS) {
+		if (
+			(average ?
+				Get_ADC_Average(EXT_GPIO_BATSENS_CHANNEL, ADC_TIMEOUT_MS, count, &value)
+				:
+				Get_ADC_Val(EXT_GPIO_BATSENS_CHANNEL, ADC_TIMEOUT_MS, &value)
+			) == ADC_SUCCESS
+		) {
 			// Map value to mV
 			value = ADC_Map(value, 0, 1023, 0.0, 3.3);
 		} else {
