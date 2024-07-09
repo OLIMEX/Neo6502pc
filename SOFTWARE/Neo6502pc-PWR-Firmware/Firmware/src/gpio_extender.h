@@ -34,10 +34,13 @@
 #define EXT_GPIO_REG_COUNT           0x0A
 
 // BATSENS = 1000 * R14 * VBAT / (R14 + R13)
-// VBAT range 4.2V - 3.2V
-#define EXT_GPIO_BATSENS_MIN         870
-#define EXT_GPIO_BATSENS_MAX         1140
+// VBAT range 4.1V - 3.3V
+#define EXT_GPIO_BATSENS_MIN         800
+#define EXT_GPIO_BATSENS_MAX         996
 
+#define EXT_GPIO_BATSENS_PORT        GPIOD
+#define EXT_GPIO_BATSENS_PIN         GPIO_Pin_2
+#define EXT_GPIO_BATSENS_CHANNEL     ADC_Channel_3
 
 /* Extender GPIO Mode enumeration */
 typedef enum {
@@ -85,7 +88,7 @@ protected:
 	static void setPin(uint8_t pin, uint8_t value);
 	static uint8_t getPin(uint8_t pin);
 	static uint8_t getBatPercent();
-	static uint16_t getBatVoltage();
+	static uint16_t getBatVoltage(bool average = false, uint8_t count = 20);
 public:
 	static uint16_t Version();
 
